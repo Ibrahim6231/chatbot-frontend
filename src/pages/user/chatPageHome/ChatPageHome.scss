@@ -1,0 +1,14 @@
+#chat-page {
+    height: 100vh;
+
+    .header{
+      height: 10%;
+    }
+    .container{
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      height: 90%;
+    }
+  }
+  
