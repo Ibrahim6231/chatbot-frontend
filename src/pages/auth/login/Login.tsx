@@ -64,7 +64,7 @@ const Login: React.FC = () => {
     useEffect(() => {
         if (isLoggedIn) {
             navigate(`/${RouteEndPoint.HOME}`);
-            toast.success("Welcome to dashboard!");
+            toast.success("Welcome to Chat bot!");
         }
     }, [isLoggedIn]);
 

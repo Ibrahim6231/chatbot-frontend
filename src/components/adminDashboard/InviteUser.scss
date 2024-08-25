@@ -1,0 +1,41 @@
+.invite-container {
+    max-width: 30rem;
+    margin: auto;
+    padding: 1.25rem;
+    text-align: center;
+    border: 1px solid #007bff; 
+    border-radius: 8px;
+    background-color: white; 
+  }
+  
+  .invite-title {
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  .invite-input .MuiOutlinedInput-root {
+    background-color: #f0f8ff; 
+    color: #000;
+  }
+  
+  .invite-button {
+    background-color: #007bff; 
+    color: white; 
+    margin-top: 1rem;
+  }
+  
+  .invite-button:hover {
+    background-color: #0056b3; 
+  }
+  
+  .invite-message {
+    margin-top: 1.25rem;
+    color: #28a745; 
+    font-weight: bold;
+
+    word-wrap: break-word;
+    i{
+      color: black;
+    }
+  }
+  

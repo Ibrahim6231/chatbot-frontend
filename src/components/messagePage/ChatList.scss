@@ -1,35 +1,59 @@
-
 .chat-list {
-    width: 30%;
-    border-right: 1px solid #ddd;
-    height: 100%;
-    overflow-y: scroll;
-  }
-  
+  width: 25%;
+  border-right: 1px solid #ddd;
+  height: 100%;
+  overflow-y: scroll;
+
   .chat-list-item {
     display: flex;
-    padding: 0.66rem;
     border-bottom: 1px solid #ddd;
     cursor: pointer;
     align-items: center;
   }
-  
+
+  .chat-list-item.selected {
+    background-color: rgb(179, 171, 214);
+  }
+
   .chat-list-item:hover {
-    background-color: #f1f1f1;
+    background-color: rgb(131, 184, 131);
   }
-  
-  .chat-avatar {
-    border-radius: 50%;
-    margin-right: 0.66rem;
-  }
-  
-  .chat-info h3 {
+
+  .chat-info {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
     margin: 0;
-    font-size: 1rem;
+
+    .refresh {
+      font-size: 2rem;
+      font-weight: bold;
+      cursor: pointer;
+      color: whitesmoke;
+      border-radius: 50%;
+
+      div {
+        margin: 0;
+        padding: 0;
+      }
+    }
+    .refresh:hover{
+      color: blue;
+      font-weight: bolder;
+      font-size: 2.5rem;
+      transition:200ms
+    }
+
+    .chat-info h3 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .chat-info p {
+      margin: 0;
+      color: #666;
+    }
   }
-  
-  .chat-info p {
-    margin: 0;
-    color: #666;
-  }
-  
+}

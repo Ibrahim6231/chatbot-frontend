@@ -7,6 +7,7 @@ const AUTH_URL = "auth";
 const END_POINT = {
     register: `${AUTH_URL}/register`,
     login: `${AUTH_URL}/login`,
+    verifyInvite: `${AUTH_URL}/verify-invite`,
 }
 
 const registerApi = async ({ newUser }: any) => {
@@ -37,6 +38,7 @@ const loginApi = async ({ loginInfo }: any) => {
             if (savedUser && token) {
                 localStorage.setItem(LocalStorageKeys.USER, savedUser);
                 localStorage.setItem(LocalStorageKeys.JWT, token);
+                toast.success("Login successful !")
                 return { user: savedUser, token };
             }
         }
@@ -45,7 +47,21 @@ const loginApi = async ({ loginInfo }: any) => {
     }
 }
 
+
+const verifyInviteApi = async ({ inviteToken }: any) => {
+    try {
+        const data = await Axios.get(`${END_POINT.verifyInvite}?inviteToken=${inviteToken}`);
+        if (data) {
+            const dataObj = data?.data?.data
+            return dataObj
+        }
+    } catch (err: any) {
+        toast.error(err?.response?.data?.message || err.message, errorToastOptions)
+    }
+}
+
 export {
     registerApi,
-    loginApi
+    loginApi,
+    verifyInviteApi
 }

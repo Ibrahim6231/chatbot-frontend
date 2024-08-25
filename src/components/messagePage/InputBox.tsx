@@ -5,9 +5,9 @@ import './InputBox.scss';
 const Input = ({ onSendMessage }) => {
   const [newMessage, setNewMessage] = useState('');
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (newMessage.trim() === '') return;
-    onSendMessage(newMessage);
+    await onSendMessage(newMessage);
     setNewMessage('');
   };
 
@@ -18,7 +18,7 @@ const Input = ({ onSendMessage }) => {
         value={newMessage}
         onChange={(e) => setNewMessage(e.target.value)}
         placeholder="Type a message..."
-        onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+        onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
       />
       <button onClick={handleSendMessage}>Send</button>
     </div>

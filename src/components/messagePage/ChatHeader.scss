@@ -1,41 +1,59 @@
 .chat-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 15px;
-    background-color: blueviolet;
-    color: #fff;
-    border-bottom: 1px solid #ddd;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.66rem 1rem;
+  background-color: blueviolet;
+  color: #fff;
+  border-bottom: 1px solid #ddd;
+
   .chat-header-left {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+
+    .user-avatar {
+      font-size: 2.25rem;
+      margin-right: 0.66rem;
+    }
+
+    .user-name {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin: 0;
+      padding: 0;
+
+      a{
+       color: rgb(34, 235, 135);
+       font-weight: bold; 
+      }
+    }
+
+    .user-name>span:nth-child(1) {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
   }
-  
-  .user-avatar {
-    font-size: 36px;
-    margin-right: 10px;
-  }
-  
-  .user-name {
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
+
+
+
+
   .chat-header-right {
     display: flex;
     align-items: center;
+
+    .header-icon {
+      font-size: 20px;
+      margin-left: 20px;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .header-icon:hover {
+      color: #34B7F1;
+    }
   }
-  
-  .header-icon {
-    font-size: 20px;
-    margin-left: 20px;
-    cursor: pointer;
-    transition: color 0.3s;
-  }
-  
-  .header-icon:hover {
-    color: #34B7F1;
-  }
-  
+}

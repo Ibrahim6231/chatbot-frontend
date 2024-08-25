@@ -1,51 +1,94 @@
 .message {
-    margin-bottom: 10px;
-    max-width: 70%;
-    padding: 10px;
-    border-radius: 8px;
+  margin-bottom: 10px;
+  max-width: 70%;
+  padding: 0.25rem 0.66rem 0.66rem 0.66rem;
+  border-radius: 8px;
 
 
-    // border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .top-section {
     display: flex;
-    align-items: flex-end;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: gray;
+    margin: 0;
+    padding: 0;
+
+    .info-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      min-width: 30%;
+
+      >div {
+        margin: 0 0.66rem 0 0;
+      }
+
+      .likes{
+        border: 1px solid rgb(174, 178, 202);
+        border-radius: 30%;
+        padding: 0 0.1em;
+        font-size: calc(0.75rem + 2px);
+        text-align: center;
+        color: blue;
+      }
+    }
+
+    .name {
+      background-color: blue;
+      border-radius: 10%;
+      color: whitesmoke;
+      padding: 0.5em;
+    }
+  }
+
+  #message-options {
+    height: 1rem;
+
+    #message-options>div {
+      height: 1rem;
+    }
+
+    #long-button {
+      height: 1rem;
+
+      svg {
+        height: calc(0.66rem + 2px);
+      }
+    }
+  }
+}
+
+.message.received {
+  background-color: #fff;
+  align-self: flex-start;
+  text-align: start;
 }
 
 .message.sent {
-    justify-content: flex-end;
-    // background-color: #DCF8C6;
-    background-color: rgb(208, 209, 236);
-    align-self: flex-end;
-    margin-left: auto;
-    text-align: right;
-  }
-  
-  .message.received {
-    background-color: #fff;
-    align-self: flex-start;
-    flex-direction: row;
-  }
-  
-  .message-content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    text-wrap: wrap;
-  }
-  
-  .message-content p {
-    margin: 0;
-    font-size: calc(0.8rem + 4px);
-  }
-  
-  .message-content span {
-    font-size: calc(0.5rem + 4px);
-    color: #888;
-  }
-  
-  .avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-  
+  justify-content: flex-end;
+  background-color: rgb(208, 209, 236);
+  align-self: flex-end;
+  margin-left: auto;
+  text-align: right;
+}
+
+
+.message-content {
+  text-wrap: wrap;
+  margin: auto 1rem;
+}
+
+.message-content p {
+  margin: 0;
+  font-size: calc(0.8rem + 4px);
+}
+
+.message-content span {
+  font-size: calc(0.5rem + 4px);
+  color: #888;
+}

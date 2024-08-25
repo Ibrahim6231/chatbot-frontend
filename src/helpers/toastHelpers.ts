@@ -7,20 +7,7 @@ const messageToastOptions: any = {
         color: '#fff',
     }
 }
-const successToastOptions: any = {
-    position: 'top-right',
-    duration: 3000
-}
-const successToastOptionsBR: any = {
-    position: 'top-right',
-    duration: 3000,
-    style: {
-        border: "0.25rem solid green",
-        padding: "0.5rem 1rem",
-        background: 'white',
-        fontWeight: "700"
-    }
-}
+
 const errorToastOptions: any = {
     position: 'top-right',
     duration: 4000,
@@ -32,4 +19,4 @@ const errorToastOptions: any = {
     }
 }
 
-export { messageToastOptions, successToastOptions,successToastOptionsBR, errorToastOptions }
+export { messageToastOptions, errorToastOptions }

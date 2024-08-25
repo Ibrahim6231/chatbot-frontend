@@ -1,70 +1,84 @@
 // ChatPageHome.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ChatList from '../../../components/messagePage/ChatList';
 import MessageWindow from '../../../components/messagePage/MessageWindow';
 import './ChatPageHome.scss';
 import ChatHeader from '../../../components/messagePage/ChatHeader';
+import { getGroupListApi } from '../../../api/group';
+import { useAppDispatch, useAppSelector } from '../../../app/reduxHooks';
+import { setChatList } from '../../../app/slices/groupChatSlice';
+import { createMessageApi, getMessagesByGroupApi } from '../../../api/message';
 
 const ChatPageHome = () => {
-  const userId = '123'; // Current user ID
-  const [chats] = useState([
-    {
-      id: '1',
-      name: 'Friend 1',
-      avatar: 'https://placekitten.com/40/40',
-      lastMessage: 'Hey there!',
-    },
-    {
-      id: '2',
-      name: 'Group Chat',
-      avatar: 'https://placekitten.com/41/41',
-      lastMessage: 'Meeting at 10 AM',
-    },
-  ]);
+  const dispatch = useAppDispatch();
+  const chatList = useAppSelector(state => state.groupChatState.chatList);
+  const user = useAppSelector(state => state.userState.user);
+  const userId = user?._id || "";
 
-  const [currentChat, setCurrentChat] = useState(null);
+  const [currentGroup, setCurrentGroup] = useState(null);
   const [messages, setMessages] = useState([]);
 
-  const handleSelectChat = (chat) => {
-    setCurrentChat(chat);
-    // Here, fetch messages for the selected chat
-    setMessages([
-      {
-        content: 'Hello!',
-        senderId: '123',
-        createdAt: new Date(),
-      },
-      {
-        content: 'Hi, how are you?',
-        senderId: '456',
-        avatar: chat.avatar,
-        createdAt: new Date(),
-      },
-    ]);
+  const handleSelectChat = async (chat) => {
+    setCurrentGroup(chat);
   };
+  const updateCurrentGroupMessages = async () => {
+    const groupMessages = await getMessagesByGroupApi(currentGroup._id);
+    if (groupMessages) {
+      groupMessages.forEach(msg => {
+        if (msg.senderId == userId) {
+          msg.isUserMsg = true;
+        }
+      })
+      setMessages(groupMessages);
+    }
+  }
 
-  const handleSendMessage = (newMessage) => {
+  const handleSendMessage = async (newMessage) => {
     const message = {
       content: newMessage,
-      senderId: userId,
-      createdAt: new Date(),
-    };
+      groupId: currentGroup._id,
+      msgType: "text",
+    }
 
-    setMessages([...messages, message]);
+    const savedMsg = await createMessageApi(message);
+    if (savedMsg) {
+      setMessages([
+        ...messages,
+        { ...savedMsg, isUserMsg: true }
+      ]);
+    }
+
   };
+
+  const fetchGroupChatList = async () => {
+    const chatList = await getGroupListApi();
+    if (chatList) {
+      dispatch(setChatList(chatList))
+    }
+  }
+  useEffect(() => {
+    fetchGroupChatList()
+
+  }, [])
+
+  useEffect(() => {
+    if (currentGroup?._id) {
+      updateCurrentGroupMessages();
+    }
+  }, [currentGroup])
 
   return (
     <div id="chat-page">
       <div className="header">
-      <ChatHeader userName={"user name"} />
+        <ChatHeader />
       </div>
       <div className="container">
-        <ChatList chats={chats} onSelectChat={handleSelectChat} />
-        {currentChat && (
+        <ChatList chats={chatList} onSelectChat={handleSelectChat} currentGroup={currentGroup}/>
+        {currentGroup && (
           <MessageWindow
             messages={messages}
+            setMessages={setMessages}
             onSendMessage={handleSendMessage}
-            userId={userId}
           />
         )}
       </div>
