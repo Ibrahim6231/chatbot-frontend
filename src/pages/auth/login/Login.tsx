@@ -13,6 +13,7 @@ import { setUser } from "../../../app/slices/authSlice";
 import { RouteEndPoint } from "../../../enums/appEnum";
 import toast from "react-hot-toast";
 import * as Yup from "yup";
+import { loader } from "../../../app/slices/loaderSlice";
 
 
 const loginValidation = Yup.object().shape({
@@ -47,7 +48,9 @@ const Login: React.FC = () => {
     };
 
     const onSubmit = async (values: UserLoginInterface, actions: any) => {
+        dispatch(loader(true));
         const signedInUser = await loginApi({ loginInfo: values });
+        dispatch(loader(false));
         if (signedInUser) {
             dispatch(setUser(signedInUser))
         }
@@ -123,6 +126,11 @@ const Login: React.FC = () => {
                                 value={formik.values.password}
                                 onChange={formik.handleChange}
                                 className="inputStyle"
+                                helperText={
+                                    formik.touched.password && formik.errors.password
+                                        ? formik.errors.password
+                                        : null
+                                }
                                 error={
                                     formik.touched.password && formik.errors.password
                                         ? true

@@ -1,20 +1,18 @@
 import './App.css';
 import AppRoutes from './routes/AppRoutes';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from "react-redux";
 import { Toaster } from 'react-hot-toast';
-import store from './app/store';
+import { useAppSelector } from './app/reduxHooks';
+import Loader from './components/loader/Loader';
 
 function App() {
+  const loaderState = useAppSelector((state) => state.loaderState);
+  const { isLoading } = loaderState;
 
   return (
     <div className="App">
-      <BrowserRouter> {/* commonly renamed as Router*/}
-        <Provider store={store}>  {/* commonly renamed as ReduxProvider*/}
+          {isLoading && <Loader />}
           <AppRoutes />
           <Toaster />
-        </Provider>
-      </BrowserRouter>
     </div>
   );
 }
